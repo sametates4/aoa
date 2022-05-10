@@ -5,6 +5,8 @@ class Worker{
   late String tarih;
   late int gun;
   late String yapilanis;
+  late int toplamucret;
+  late String telefon;
 
   Worker();
 
@@ -15,6 +17,8 @@ class Worker{
     gun = map['gun'];
     tarih = map['tarih'];
     yapilanis = map['yapilanis'];
+    toplamucret = map['toplamucret'];
+    telefon = map['telefon'];
   }
 
   Map<String, dynamic> toMap() {
@@ -24,6 +28,8 @@ class Worker{
     map['gun'] = gun;
     map['tarih'] = tarih;
     map['yapilanis'] = yapilanis;
+    map['toplamucret'] = toplamucret;
+    map['telefon'] = telefon;
     return map;
   }
 }

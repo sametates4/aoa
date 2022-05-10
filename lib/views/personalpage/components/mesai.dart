@@ -1,7 +1,9 @@
 import 'package:aoa/service/provider/db/personalmodel.dart';
 import 'package:aoa/service/provider/tarihmodel.dart';
+import 'package:aoa/service/value.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Mesai extends StatelessWidget {
@@ -59,7 +61,9 @@ class Mesai extends StatelessWidget {
                         firstDate: DateTime(2020),
                         lastDate: DateTime(2050))
                         .then((e) {
-                      context.read<TarihModel>().valChange("${e!.day}/${e.month}/${e.year}");
+                      final DateFormat formatter = DateFormat('dd/MM/yyyy');
+                      final String formatted = formatter.format(e!);
+                      context.read<TarihModel>().valChange(formatted);
                     });
                   },
                 ),
@@ -72,7 +76,7 @@ class Mesai extends StatelessWidget {
                 ElevatedButton(
                   child: const Text("Kayıt et"),
                   onPressed: (){
-                    context.read<PersonalModel>().insert("2", int.parse(_ucret.text), context.read<TarihModel>().valRead(), _yapilanis.text);
+                    context.read<PersonalModel>().insert("2", int.parse(_ucret.text), context.read<TarihModel>().valRead(), _yapilanis.text, date);
                     Get.back();
                   },
                 )

@@ -1,29 +1,27 @@
-import 'dart:typed_data';
-
 import 'package:aoa/service/getx/gelir.dart';
 import 'package:aoa/service/model/personal.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
-import 'package:provider/provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'dart:io';
 
-createPDF(List<Personal> model) async {
+createPDF(List<Personal> model, int gelir, int gider) async {
+  final font = await rootBundle.load("assets/open-sans.ttf");
+  final ttf = Font.ttf(font);
   final pdf = Document();
   pdf.addPage(MultiPage(
     pageFormat: PdfPageFormat.a4,
     build: (context) => [
-      header(),
+      header(ttf),
       SizedBox(height: 2 * PdfPageFormat.cm),
       title(),
-      list(model, context,),
+      list(model, context, ttf),
       SizedBox(height: 15),
-      total(),
+      total(ttf, gelir, gider),
       //Divider(),
       //buildTotal(invoice),
     ],
@@ -36,7 +34,8 @@ createPDF(List<Personal> model) async {
   await OpenFile.open(file.path);
 }
 
-Widget header() {
+Widget header(font) {
+
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     SizedBox(height: 1 * PdfPageFormat.cm),
     Row(
@@ -45,9 +44,9 @@ Widget header() {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Uygulama Adı", style: TextStyle(fontWeight: FontWeight.bold,)),
+            Text("Uygulama Adı", style: TextStyle(fontWeight: FontWeight.bold, font: font)),
             Text(""),
-            Text("Tarih"),
+            Text("Tarih", style: TextStyle(font: font)),
           ],
         )
       ],
@@ -71,7 +70,7 @@ Widget title() {
   );
 }
 
-Widget list(List<Personal> model, context) {
+Widget list(List<Personal> model, context, font) {
   pdfController controller = Get.put(pdfController());
   return Column(children: [
     Container(
@@ -88,7 +87,7 @@ Widget list(List<Personal> model, context) {
                 decoration: BoxDecoration(
                   border: Border.all(),
                 ),
-                child: Row(children: [Text("  Harcama Türü"),]),
+                child: Row(children: [Text("  Harcama Türü", style: TextStyle(font: font)),]),
               ),
               Container(
                 width: 120,
@@ -96,7 +95,7 @@ Widget list(List<Personal> model, context) {
                 decoration: BoxDecoration(
                   border: Border.all(),
                 ),
-                child: Row(children: [Text("  Para Miktarı"),]),
+                child: Row(children: [Text("  Para Miktarı", style: TextStyle(font: font)),]),
               ),
               Container(
                 width: 120,
@@ -104,7 +103,7 @@ Widget list(List<Personal> model, context) {
                 decoration: BoxDecoration(
                   border: Border.all(),
                 ),
-                child: Row(children: [Text("  Yapılan iş"),]),
+                child: Row(children: [Text("  Yapılan iş", style: TextStyle(font: font)),]),
               ),
               Container(
                 width: 121.7,
@@ -112,7 +111,7 @@ Widget list(List<Personal> model, context) {
                 decoration: BoxDecoration(
                   border: Border.all(),
                 ),
-                child: Row(children: [Text("  Tarih"),]),
+                child: Row(children: [Text("  Tarih", style: TextStyle(font: font)),]),
               ),
             ]
         )
@@ -137,7 +136,7 @@ Widget list(List<Personal> model, context) {
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
-                      child: Row(children: [Text("  Gider"),]),
+                      child: Row(children: [Text("  Gider", style: TextStyle(font: font)),]),
                     ),
                     Container(
                       width: 120,
@@ -145,7 +144,7 @@ Widget list(List<Personal> model, context) {
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
-                      child: Row(children: [Text("  ${model[index].ucret} TL"),]),
+                      child: Row(children: [Text("  ${model[index].ucret} TL", style: TextStyle(font: font)),]),
                     ),
                     Container(
                       width: 120,
@@ -153,7 +152,7 @@ Widget list(List<Personal> model, context) {
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
-                      child: Row(children: [Text("  ${model[index].yapilanis}"),]),
+                      child: Row(children: [Text("  ${model[index].yapilanis}", style: TextStyle(font: font)),]),
                     ),
                     Container(
                       width: 121.7,
@@ -161,7 +160,7 @@ Widget list(List<Personal> model, context) {
                       decoration: BoxDecoration(
                         border: Border.all(),
                       ),
-                      child: Row(children: [Text("  ${model[index].tarih}"),]),
+                      child: Row(children: [Text("  ${model[index].tarih}", style: TextStyle(font: font)),]),
                     ),
                   ]
               )
@@ -183,7 +182,7 @@ Widget list(List<Personal> model, context) {
                           decoration: BoxDecoration(
                             border: Border.all(),
                           ),
-                          child: Row(children: [Text("  Gelir"),]),
+                          child: Row(children: [Text("  Gelir", style: TextStyle(font: font)),]),
                         ),
                         Container(
                           width: 120,
@@ -191,7 +190,7 @@ Widget list(List<Personal> model, context) {
                           decoration: BoxDecoration(
                             border: Border.all(),
                           ),
-                          child: Row(children: [Text("  ${model[index].ucret} TL"),]),
+                          child: Row(children: [Text("  ${model[index].ucret} TL", style: TextStyle(font: font)),]),
                         ),
                         Container(
                           width: 120,
@@ -199,7 +198,7 @@ Widget list(List<Personal> model, context) {
                           decoration: BoxDecoration(
                             border: Border.all(),
                           ),
-                          child: Row(children: [Text("  ${model[index].yapilanis}"),]),
+                          child: Row(children: [Text("  ${model[index].yapilanis}", style: TextStyle(font: font)),]),
                         ),
                         Container(
                           width: 121.7,
@@ -207,7 +206,7 @@ Widget list(List<Personal> model, context) {
                           decoration: BoxDecoration(
                             border: Border.all(),
                           ),
-                          child: Row(children: [Text("  ${model[index].tarih}"),]),
+                          child: Row(children: [Text("  ${model[index].tarih}", style: TextStyle(font: font)),]),
                         ),
                       ]
                   )
@@ -229,7 +228,7 @@ Widget list(List<Personal> model, context) {
                             decoration: BoxDecoration(
                               border: Border.all(),
                             ),
-                            child: Row(children: [Text("  Mesai"),]),
+                            child: Row(children: [Text("  Mesai", style: TextStyle(font: font)),]),
                           ),
                           Container(
                             width: 120,
@@ -237,7 +236,7 @@ Widget list(List<Personal> model, context) {
                             decoration: BoxDecoration(
                               border: Border.all(),
                             ),
-                            child: Row(children: [Text("  ${model[index].ucret} TL"),]),
+                            child: Row(children: [Text("  ${model[index].ucret} TL", style: TextStyle(font: font)),]),
                           ),
                           Container(
                             width: 120,
@@ -245,7 +244,7 @@ Widget list(List<Personal> model, context) {
                             decoration: BoxDecoration(
                               border: Border.all(),
                             ),
-                            child: Row(children: [Text("  ${model[index].yapilanis}"),]),
+                            child: Row(children: [Text("  ${model[index].yapilanis}", style: TextStyle(font: font)),]),
                           ),
                           Container(
                             width: 121.7,
@@ -253,7 +252,7 @@ Widget list(List<Personal> model, context) {
                             decoration: BoxDecoration(
                               border: Border.all(),
                             ),
-                            child: Row(children: [Text("  ${model[index].tarih}"),]),
+                            child: Row(children: [Text("  ${model[index].tarih}", style: TextStyle(font: font)),]),
                           ),
                         ]
                     )
@@ -267,17 +266,17 @@ Widget list(List<Personal> model, context) {
   ]);
 }
 
-Widget total(){
+Widget total(font, gelir, gider){
   pdfController controller = Get.put(pdfController());
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
       Column(
         children: [
-          Text("Toplam kazanılan: ${controller.gelRead()}"),
-          Text("Toplam Harcanan: ${controller.valRead()}"),
+          Text("Toplam kazanılan: $gelir", style: TextStyle(font: font)),
+          Text("Toplam Harcanan: $gider", style: TextStyle(font: font)),
           Divider(),
-          Text("Sonuc: ${controller.gelRead() - controller.valRead()}"),
+          Text("Sonuc: ${gelir - gider}", style: TextStyle(font: font)),
         ]
       )
     ]

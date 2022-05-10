@@ -1,68 +1,128 @@
-import 'package:aoa/service/db/personaldao.dart';
-import 'package:aoa/service/model/personal.dart';
-import 'package:aoa/service/pdf/personal/createpdf.dart';
-import 'package:aoa/service/provider/db/personalmodel.dart';
+import 'package:aoa/views/personalpage/components/dialog.dart';
 import 'package:aoa/views/personalpage/components/gelir.dart';
 import 'package:aoa/views/personalpage/components/gider.dart';
 import 'package:aoa/views/personalpage/components/mesai.dart';
 import 'package:aoa/views/personalpage/components/son10.dart';
+import 'package:aoa/views/personalpage/components/tumkayit.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
-
+  Body({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              child: const Text("Gelir Ekle"),
-              onPressed: (){
-                Get.to(() => Gelir());
-              },
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.teal),
             ),
-            ElevatedButton(
-              child: const Text("Gider Ekle"),
-              onPressed: (){
-                Get.to(() => Gider());
-              },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Row(
+                children: [
+                  const Text("Gelir Ekle", style: TextStyle(fontSize: 20),),
+                  const Spacer(),
+                  Image.asset("assets/add.png", height: 50,),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              child: const Text("Mesai ekle"),
-              onPressed: (){
-                Get.to(() => Mesai());
-              },
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.teal),
             ),
-            ElevatedButton(
-              child: const Text("Kayıt Görüntüle"),
-              onPressed: (){},
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Row(
+                children: [
+                  const Text("Gider Ekle", style: TextStyle(fontSize: 20),),
+                  const Spacer(),
+                  Image.asset("assets/remove.png"),
+                ],
+              ),
             ),
-          ],
+          ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              icon: const Icon(Icons.save_outlined),
-              label: const Text("Rapor Oluştur"),
-              onPressed: ()async{
-                var result = await PersonalDao().read();
-                List<Personal> model = result;
-                createPDF(model);
-              },
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.teal),
             ),
-          ],
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Row(
+                children: [
+                  const Text("Mesai Ekle", style: TextStyle(fontSize: 20),),
+                  const Spacer(),
+                  Image.asset("assets/add.png"),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.teal),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Row(
+                children: [
+                  const Text("Kayıtları Görüntüle", style: TextStyle(fontSize: 20),),
+                  const Spacer(),
+                  Image.asset("assets/add.png"),
+                ],
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: (){
+            Get.bottomSheet(const DialogRapor());
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: Container(
+              width: double.infinity,
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.teal),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                child: Row(
+                  children: [
+                    const Text("Rapor oluştur", style: TextStyle(fontSize: 20),),
+                    const Spacer(),
+                    Image.asset("assets/doc.png", height: 50),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
         const Son10(),
       ],

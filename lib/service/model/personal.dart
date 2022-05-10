@@ -4,6 +4,7 @@ class Personal{
   late int ucret;
   late String tarih;
   late String yapilanis;
+  late int search;
 
   Personal();
 
@@ -13,6 +14,7 @@ class Personal{
     ucret = map['ucret'];
     tarih = map['tarih'];
     yapilanis = map['yapilanis'];
+    search = map['search'];
   }
 
   Map<String, dynamic> toMap() {
@@ -21,6 +23,7 @@ class Personal{
     map['ucret'] = ucret;
     map['tarih'] = tarih;
     map['yapilanis'] = yapilanis;
+    map['search'] = search;
     return map;
   }
 }

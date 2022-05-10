@@ -12,23 +12,20 @@ class WorkerModel extends ChangeNotifier {
   }
 
   Future insert(String isimsoyisim, int ucret, String tarih, int gun,
-      String yapilanis) async {
+      String yapilanis, int toplamucret, String telefon) async {
     _dao.insert({
       'isimsoyisim': isimsoyisim,
       'ucret': ucret,
       'tarih': tarih,
       'gun': gun,
-      'yapilanis': yapilanis
+      'yapilanis': yapilanis,
+      'toplamucret':toplamucret,
+      'telefon':telefon
     });
   }
 
-  Future update(String isimsoyisim, int ucret, String tarih, int gun,
-      String yapilanis, int id) async {
-    _dao.update(id, {      'isimsoyisim': isimsoyisim,
-      'ucret': ucret,
-      'tarih': tarih,
-      'gun': gun,
-      'yapilanis': yapilanis});
+  Future update(int toplamucret, int gun, int id) async {
+    _dao.update(id, {'toplamucret': toplamucret, 'gun': gun});
     list = await _dao.read();
     notifyListeners();
   }

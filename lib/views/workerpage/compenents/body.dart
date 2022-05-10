@@ -1,4 +1,8 @@
+import 'package:aoa/views/workerpage/compenents/calisankayit.dart';
+import 'package:aoa/views/workerpage/compenents/calisanlarim.dart';
+import 'package:aoa/views/workerpage/compenents/kayit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -13,7 +17,9 @@ class Body extends StatelessWidget {
           children: [
             ElevatedButton(
               child: const Text("Kayıt Ekle"),
-              onPressed: (){},
+              onPressed: (){
+                Get.to(Kayit());
+              },
             ),
             ElevatedButton(
               child: const Text("Kayıt Güncelle"),
@@ -30,7 +36,9 @@ class Body extends StatelessWidget {
             ),
             ElevatedButton(
               child: const Text("Çalışanlarım"),
-              onPressed: (){},
+              onPressed: (){
+                Get.to(Calisanlarim());
+              },
             ),
           ],
         ),
@@ -41,6 +49,18 @@ class Body extends StatelessWidget {
               icon: const Icon(Icons.save_outlined),
               label: const Text("Rapor Oluştur"),
               onPressed: (){},
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton.icon(
+              icon: const Icon(Icons.save_outlined),
+              label: const Text("Çalışan Ekle"),
+              onPressed: (){
+                Get.bottomSheet(Register());
+              },
             ),
           ],
         ),

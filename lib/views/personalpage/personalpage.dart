@@ -22,7 +22,7 @@ class _PersonaPageState extends State<PersonaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Ana Sayfa"),),
-      body: const Body(),
+      body: Body(),
     );
   }
 }

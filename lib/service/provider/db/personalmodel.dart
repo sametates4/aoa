@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class PersonalModel extends ChangeNotifier {
   List<Personal> list = <Personal>[];
+  List<Personal> searchList = <Personal>[];
   final PersonalDao _dao = PersonalDao();
 
   Future<void> read() async {
@@ -11,8 +12,14 @@ class PersonalModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future insert(String tur, int ucret, String tarih, String yapilanis) async {
-    _dao.insert({'tur': tur, 'ucret': ucret, 'tarih': tarih, 'yapilanis':yapilanis});
+  Future<void> search(String baslangic, String bitis) async{
+    searchList = await _dao.search(baslangic, bitis);
+    print("aranan kan$searchList");
+    notifyListeners();
+  }
+
+  Future insert(String tur, int ucret, String tarih, String yapilanis, int search) async {
+    _dao.insert({'tur': tur, 'ucret': ucret, 'tarih': tarih, 'yapilanis':yapilanis, 'search':search});
     list = await _dao.read();
     notifyListeners();
   }

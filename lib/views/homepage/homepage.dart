@@ -18,18 +18,30 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ElevatedButton(
-              child: const Text("Çalışanım İçin Hesapla"),
-              onPressed: (){
-                Get.to(const WorkerPage());
-              },
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: (){
+                    Get.to(() => const WorkerPage());
+                  },
+                    child: Image.asset("assets/worker.png", width: 100, height: 110,)
+                ),
+                const Text("Çalışanım için hesapla", style: TextStyle(fontSize: 20),),
+              ],
             ),
-            ElevatedButton(
-              child: const Text("Kendim İçin Hesapla"),
-              onPressed: (){
-                Get.to(const PersonaPage());
-              },
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: (){
+                    Get.to(() =>  const PersonaPage());
+                  },
+                    child: Image.asset("assets/personal.png", width: 95, height: 110,)),
+                const Text("Kendim İçin Hesapla", style: TextStyle(fontSize: 20),),
+              ],
             ),
+
           ],
         ),
       ),
