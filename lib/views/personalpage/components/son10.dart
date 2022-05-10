@@ -12,8 +12,17 @@ class Son10 extends StatelessWidget {
         width: double.infinity,
         height: 375,
         decoration: BoxDecoration(
+          color: Colors.white,
           border: Border.all(color: Colors.orange),
           borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.orangeAccent,
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: Offset(4, 4),
+            ),
+          ]
         ),
         child: Column(
           children: const [

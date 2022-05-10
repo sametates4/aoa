@@ -1,3 +1,4 @@
+import 'package:aoa/views/personalpage/components/customubutton.dart';
 import 'package:aoa/views/personalpage/components/dialog.dart';
 import 'package:aoa/views/personalpage/components/gelir.dart';
 import 'package:aoa/views/personalpage/components/gider.dart';
@@ -9,121 +10,48 @@ import 'package:get/get.dart';
 
 class Body extends StatelessWidget {
   Body({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
-          child: Container(
-            width: double.infinity,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.teal),
+        const SizedBox(height: 20,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InkWell(
+              onTap: (){
+                Get.to(() => Gelir());
+              },
+                child: CustomButton("Gelir Ekle", "assets/add.png")
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              child: Row(
-                children: [
-                  const Text("Gelir Ekle", style: TextStyle(fontSize: 20),),
-                  const Spacer(),
-                  Image.asset("assets/add.png", height: 50,),
-                ],
-              ),
+            InkWell(
+                onTap: (){
+                  Get.to(() => Gider());
+                },
+                child: CustomButton("Gider Ekle", "assets/gider.png"),
             ),
-          ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
-          child: Container(
-            width: double.infinity,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.teal),
+        const SizedBox(height: 20,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InkWell(
+                onTap: (){
+                  Get.to(() => Mesai());
+                },
+                child: CustomButton("Mesai Ekle", "assets/mesai.png")
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              child: Row(
-                children: [
-                  const Text("Gider Ekle", style: TextStyle(fontSize: 20),),
-                  const Spacer(),
-                  Image.asset("assets/remove.png"),
-                ],
-              ),
+            InkWell(
+              onTap: (){
+                Get.bottomSheet(const DialogRapor());
+              },
+              child: CustomButton("Rapor Oluştur", "assets/doc.png"),
             ),
-          ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
-          child: Container(
-            width: double.infinity,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.teal),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              child: Row(
-                children: [
-                  const Text("Mesai Ekle", style: TextStyle(fontSize: 20),),
-                  const Spacer(),
-                  Image.asset("assets/add.png"),
-                ],
-              ),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
-          child: Container(
-            width: double.infinity,
-            height: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.teal),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              child: Row(
-                children: [
-                  const Text("Kayıtları Görüntüle", style: TextStyle(fontSize: 20),),
-                  const Spacer(),
-                  Image.asset("assets/add.png"),
-                ],
-              ),
-            ),
-          ),
-        ),
-        GestureDetector(
-          onTap: (){
-            Get.bottomSheet(const DialogRapor());
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Container(
-              width: double.infinity,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.teal),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                child: Row(
-                  children: [
-                    const Text("Rapor oluştur", style: TextStyle(fontSize: 20),),
-                    const Spacer(),
-                    Image.asset("assets/doc.png", height: 50),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+        const SizedBox(height: 40,),
         const Son10(),
       ],
     );
