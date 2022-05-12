@@ -12,14 +12,27 @@ class PersonalModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> search(String baslangic, String bitis) async{
-    searchList = await _dao.search(baslangic, bitis);
-    print("aranan kan$searchList");
+  Future<void> searchRead() async{
+    searchList;
     notifyListeners();
   }
 
-  Future insert(String tur, int ucret, String tarih, String yapilanis, int search) async {
-    _dao.insert({'tur': tur, 'ucret': ucret, 'tarih': tarih, 'yapilanis':yapilanis, 'search':search});
+  Future<void> search(int month) async{
+    for(int i = 0; i < list.length; i++){
+      if(list[i].month == month){
+        searchList.add(list[i]);
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> clear()async{
+    searchList.clear();
+    notifyListeners();
+  }
+
+  Future insert(String tur, int ucret, String tarih, String yapilanis, int month, int saat) async {
+    _dao.insert({'tur': tur, 'ucret': ucret, 'tarih': tarih, 'yapilanis':yapilanis, 'month':month, 'saat':saat});
     list = await _dao.read();
     notifyListeners();
   }

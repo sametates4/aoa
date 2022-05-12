@@ -13,6 +13,12 @@ class WorkerDao{
     db.insert("worker", data);
   }
 
+  Future<List<Worker>> search(int month) async{
+    var db = await VeritabaniYardimcisi.veritabaniErisim();
+    List<Map<String, dynamic>> data = await db.rawQuery('''SELECT * FROM worker WHERE tarih LIKE '$month' ''');
+    return data.map((e) => Worker.fromMap(e)).toList();
+  }
+
   Future<void> update(int id, Map<String, Object> data)async{
     var db = await VeritabaniYardimcisi.veritabaniErisim();
     db.update("worker", data, where: "id=?", whereArgs: [id]);

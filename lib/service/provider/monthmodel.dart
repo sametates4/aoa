@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TarihBaslangicModel extends ChangeNotifier{
-  late String value = "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}";
+class MonthModel extends ChangeNotifier{
+  late String value = "";
 
   String valRead(){
     return value;

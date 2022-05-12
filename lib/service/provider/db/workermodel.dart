@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class WorkerModel extends ChangeNotifier {
   List<Worker> list = <Worker>[];
+  List<Worker> searchList = <Worker>[];
   final WorkerDao _dao = WorkerDao();
 
   Future<void> read() async {
@@ -12,7 +13,7 @@ class WorkerModel extends ChangeNotifier {
   }
 
   Future insert(String isimsoyisim, int ucret, String tarih, int gun,
-      String yapilanis, int toplamucret, String telefon) async {
+      String yapilanis, int toplamucret, String telefon, int month) async {
     _dao.insert({
       'isimsoyisim': isimsoyisim,
       'ucret': ucret,
@@ -20,13 +21,30 @@ class WorkerModel extends ChangeNotifier {
       'gun': gun,
       'yapilanis': yapilanis,
       'toplamucret':toplamucret,
-      'telefon':telefon
+      'telefon':telefon,
+      'month':month
     });
+    list = await _dao.read();
+    notifyListeners();
   }
 
   Future update(int toplamucret, int gun, int id) async {
     _dao.update(id, {'toplamucret': toplamucret, 'gun': gun});
     list = await _dao.read();
+    notifyListeners();
+  }
+
+  Future<void> search(int month) async{
+    for(int i = 0; i < list.length; i++){
+      if(list[i].month == month){
+        searchList.add(list[i]);
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> clear()async{
+    searchList.clear();
     notifyListeners();
   }
 

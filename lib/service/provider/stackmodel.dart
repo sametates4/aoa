@@ -7,8 +7,8 @@ class StackModel extends ChangeNotifier{
     return value;
   }
 
-  void valChange(bool val){
-    value = val;
+  void valChange(){
+    value = !value;
     notifyListeners();
   }
 }

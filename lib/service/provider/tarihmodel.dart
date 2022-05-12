@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TarihModel extends ChangeNotifier{
-  late String value = "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}";
+  late String value = "Tarih Seçiniz";
 
   String valRead(){
     return value;

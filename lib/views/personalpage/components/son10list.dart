@@ -14,7 +14,7 @@ class Son10List extends StatelessWidget {
           builder: (context, value, child) {
             if(value.list.isNotEmpty){
               return ListView.builder(
-                itemCount: 10,
+                itemCount: value.list.length,
                 itemBuilder: (context, index){
                   var reserve = value.list.length - 1 - index;
                   var i = value.list[reserve];
@@ -28,7 +28,7 @@ class Son10List extends StatelessWidget {
                           if(i.tur == "0")
                             const Text("Gider"),
                           if(i.tur == "2")
-                            const Text("Mesai"),
+                             Text("Mesai ${i.month}"),
                         ],
                       ),
                       title: Text(i.yapilanis),

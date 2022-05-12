@@ -4,7 +4,8 @@ class Personal{
   late int ucret;
   late String tarih;
   late String yapilanis;
-  late int search;
+  late int month;
+  late int saat;
 
   Personal();
 
@@ -14,7 +15,8 @@ class Personal{
     ucret = map['ucret'];
     tarih = map['tarih'];
     yapilanis = map['yapilanis'];
-    search = map['search'];
+    month = map['month'];
+    saat = map['saat'];
   }
 
   Map<String, dynamic> toMap() {
@@ -23,7 +25,8 @@ class Personal{
     map['ucret'] = ucret;
     map['tarih'] = tarih;
     map['yapilanis'] = yapilanis;
-    map['search'] = search;
+    map['month'] = month;
+    map['saat'] = saat;
     return map;
   }
 }

@@ -5,6 +5,7 @@ import 'package:aoa/service/provider/db/personalmodel.dart';
 import 'package:aoa/service/provider/gelirmodel.dart';
 import 'package:aoa/service/provider/gidermodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class PreviewPage extends StatefulWidget {
@@ -15,6 +16,14 @@ class PreviewPage extends StatefulWidget {
 }
 
 class _PreviewPageState extends State<PreviewPage> {
+
+  @override
+  void initState() {
+    Provider.of<PersonalModel>(context, listen: false).read();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -100,13 +109,38 @@ class _PreviewPageState extends State<PreviewPage> {
                       ),
                       Text("Sonuc: ${context.watch<GelirModel>().valRead() - context.watch<GiderModel>().valRead()}"),*/
                       const SizedBox(height: 15,),
-                      ElevatedButton(
-                        child: const Text("Kayıt Et"),
-                        onPressed: ()async{
-                          var result = await PersonalDao().read();
+                      InkWell(
+                        onTap: ()async {
+                          var result = await context.read<PersonalModel>().searchList;
                           List<Personal> model = result;
                           createPDF(model, context.read<GelirModel>().valRead(), context.read<GiderModel>().valRead());
+                          context.read<GelirModel>().valChange(0);
+                          context.read<GiderModel>().valChange(0);
+                          Get.back();
                         },
+                        child: Container(
+                          width: 180,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              border: Border.all(),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.purple,
+                                  spreadRadius: 1,
+                                  blurRadius: 8,
+                                  offset: Offset(4, 4),
+                                ),
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  spreadRadius: 2,
+                                  blurRadius: 8,
+                                  offset: Offset(-4, -4),
+                                ),
+                              ]),
+                          child: const Center(child: Text("Pdf olarak dışa aktar", style: TextStyle(fontSize: 19),),),
+                        ),
                       ),
                     ],
                   ),

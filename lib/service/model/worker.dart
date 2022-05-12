@@ -7,6 +7,7 @@ class Worker{
   late String yapilanis;
   late int toplamucret;
   late String telefon;
+  late int month;
 
   Worker();
 
@@ -19,6 +20,7 @@ class Worker{
     yapilanis = map['yapilanis'];
     toplamucret = map['toplamucret'];
     telefon = map['telefon'];
+    month = map['month'];
   }
 
   Map<String, dynamic> toMap() {
@@ -30,6 +32,7 @@ class Worker{
     map['yapilanis'] = yapilanis;
     map['toplamucret'] = toplamucret;
     map['telefon'] = telefon;
+    map['month'] = month;
     return map;
   }
 }

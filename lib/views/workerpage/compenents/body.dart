@@ -1,6 +1,11 @@
+import 'package:aoa/views/previewpageworker/previewpageworker.dart';
 import 'package:aoa/views/workerpage/compenents/calisankayit.dart';
 import 'package:aoa/views/workerpage/compenents/calisanlarim.dart';
+import 'package:aoa/views/workerpage/compenents/custombutton.dart';
+import 'package:aoa/views/workerpage/compenents/dialog.dart';
+import 'package:aoa/views/workerpage/compenents/guncelle.dart';
 import 'package:aoa/views/workerpage/compenents/kayit.dart';
+import 'package:aoa/views/workerpage/compenents/tumkayitlar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,60 +15,57 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        const SizedBox(height: 22,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ElevatedButton(
-              child: const Text("Kayıt Ekle"),
-              onPressed: (){
-                Get.to(Kayit());
+            InkWell(
+              onTap: (){
+                Get.to(() => const Kayit());
               },
-            ),
-            ElevatedButton(
-              child: const Text("Kayıt Güncelle"),
-              onPressed: (){},
-            ),
+                child: CustomButton("Kayıt Ekle", "assets/kayit.png")),
+            InkWell(
+              onTap: (){
+                Get.to(() => const Guncelle());
+              },
+                child: CustomButton("Kayıt Güncelle", "assets/güncelle.png")),
           ],
         ),
+        const SizedBox(height: 22,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ElevatedButton(
-              child: const Text("Kayıt Görüntüle"),
-              onPressed: (){},
-            ),
-            ElevatedButton(
-              child: const Text("Çalışanlarım"),
-              onPressed: (){
-                Get.to(Calisanlarim());
+            InkWell(
+              onTap: (){
+                Get.to(() => const Calisanlarim());
               },
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              icon: const Icon(Icons.save_outlined),
-              label: const Text("Rapor Oluştur"),
-              onPressed: (){},
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton.icon(
-              icon: const Icon(Icons.save_outlined),
-              label: const Text("Çalışan Ekle"),
-              onPressed: (){
+                child: CustomButton("Çalışanlarım", "assets/calisanlarim.png")),
+            InkWell(
+              onTap: (){
                 Get.bottomSheet(Register());
               },
-            ),
+                child: CustomButton("Çalışan Ekle", "assets/calisanekle.png")),
           ],
         ),
+        const SizedBox(height: 22,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            InkWell(
+              onTap: (){
+                Get.to(() => const TumKayitlar());
+              },
+                child: CustomButton("Tüm Kayıtlar", "assets/tumkayitlar.png")),
+            InkWell(
+              onTap: (){
+                //Get.to(() => const PreviewPageWorker());
+                Get.bottomSheet(DialogRaporWorker());
+              },
+                child: CustomButton("Rapor Oluştur", "assets/rapor.png")),
+          ],
+        ),
+        const SizedBox(height: 22,),
       ],
     );
   }
