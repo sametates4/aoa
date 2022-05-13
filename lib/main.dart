@@ -16,9 +16,61 @@ import 'package:aoa/service/provider/tarihmodel.dart';
 import 'package:aoa/views/homepage/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+AppOpenAd? openAd;
+
+Future<void> loadAd() async {
+  await AppOpenAd.load(
+      adUnitId: 'ca-app-pub-3421453932487412/6161984402',
+      request: const AdRequest(),
+      adLoadCallback: AppOpenAdLoadCallback(
+          onAdLoaded: (ad){
+            print('ad is loaded');
+            openAd = ad;
+            openAd!.show();
+          },
+          onAdFailedToLoad: (error) {
+            print('ad failed to load $error');
+          }), orientation: AppOpenAd.orientationPortrait
+  );
+}
+
+void showAd() {
+  if(openAd == null) {
+    print('trying tto show before loading');
+    loadAd();
+    return;
+  }
+
+  openAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (ad) {
+        print('onAdShowedFullScreenContent');
+      },
+      onAdFailedToShowFullScreenContent: (ad, error){
+        ad.dispose();
+        print('failed to load $error');
+        openAd = null;
+        loadAd();
+      },
+      onAdDismissedFullScreenContent: (ad){
+        ad.dispose();
+        print('dismissed');
+        openAd = null;
+        loadAd();
+      }
+  );
+
+  openAd!.show();
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await MobileAds.instance.initialize();
+
+  await loadAd();
   runApp(const MyApp());
 }
 
@@ -45,7 +97,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ParaModel()),
       ],
       child: GetMaterialApp(
-        title: 'Flutter Demo',
+        title: 'Yevmiye - Puantaj Hesabım',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),

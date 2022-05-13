@@ -10,6 +10,7 @@ import 'package:aoa/views/ozetgrafik/ozetgrafik.dart';
 import 'package:aoa/views/personalpage/personalpage.dart';
 import 'package:aoa/views/workerpage/workerpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,6 +54,8 @@ class _HomePageState extends State<HomePage> {
       }
     }
   }
+
+  late String appPackageName = "sametates.com.aoa";
 
   @override
   Widget build(BuildContext context) {
@@ -197,6 +200,45 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: (){
+                    try {
+                      launch("market://details?id=" + appPackageName);
+                    } on PlatformException catch(e) {
+                      launch("https://play.google.com/store/apps/details?id=" + appPackageName);
+                    } finally {
+                      launch("https://play.google.com/store/apps/details?id=" + appPackageName);
+                    }
+                  },
+                  child: Container(
+                    width: 130,
+                    height: 130,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.purple,
+                            spreadRadius: 1,
+                            blurRadius: 8,
+                            offset: Offset(4, 4),
+                          ),
+                          BoxShadow(
+                            color: Colors.black12,
+                            spreadRadius: 2,
+                            blurRadius: 8,
+                            offset: Offset(-4, -4),
+                          ),
+                        ]),
+                    child: const Center(
+                        child: Text("Bizi Oylayın")),
+                  ),
+                ),
+              ]
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:aoa/service/db/personaldao.dart';
 import 'package:aoa/service/model/personal.dart';
 import 'package:aoa/service/provider/db/personalmodel.dart';
+import 'package:aoa/views/bottomvawbar.dart';
 import 'package:aoa/views/personalpage/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,7 @@ class _PersonaPageState extends State<PersonaPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("Ana Sayfa"),),
       body: Body(),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:aoa/service/provider/db/calisanlarmodel.dart';
 import 'package:aoa/service/provider/db/workermodel.dart';
+import 'package:aoa/views/bottomvawbar.dart';
 import 'package:aoa/views/workerpage/compenents/body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class _WorkerPageState extends State<WorkerPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("Ana sayfa"),),
       body: const Body(),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

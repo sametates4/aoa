@@ -4,6 +4,7 @@ import 'package:aoa/service/pdf/personal/createpdf.dart';
 import 'package:aoa/service/provider/db/personalmodel.dart';
 import 'package:aoa/service/provider/gelirmodel.dart';
 import 'package:aoa/service/provider/gidermodel.dart';
+import 'package:aoa/service/provider/monthmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -100,20 +101,12 @@ class _PreviewPageState extends State<PreviewPage> {
                 children: [
                   Column(
                     children: [
-/*                      Text("Toplam kazanılan: ${context.watch<GelirModel>().valRead()}"),
-                      Text("Toplam harcanan: ${context.watch<GiderModel>().valRead()}"),
-                      SizedBox(
-                        width: 170,
-                        height: 10,
-                        child: const Divider(color: Colors.black,height: 3),
-                      ),
-                      Text("Sonuc: ${context.watch<GelirModel>().valRead() - context.watch<GiderModel>().valRead()}"),*/
                       const SizedBox(height: 15,),
                       InkWell(
                         onTap: ()async {
                           var result = await context.read<PersonalModel>().searchList;
                           List<Personal> model = result;
-                          createPDF(model, context.read<GelirModel>().valRead(), context.read<GiderModel>().valRead());
+                          createPDF(model, context.read<GelirModel>().valRead(), context.read<GiderModel>().valRead(), context.read<MonthModel>().valRead());
                           context.read<GelirModel>().valChange(0);
                           context.read<GiderModel>().valChange(0);
                           Get.back();

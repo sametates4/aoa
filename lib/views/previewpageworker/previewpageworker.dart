@@ -3,6 +3,7 @@ import 'package:aoa/service/pdf/worker/createpdf.dart';
 import 'package:aoa/service/provider/calisanmodel.dart';
 import 'package:aoa/service/provider/db/paramodel.dart';
 import 'package:aoa/service/provider/db/workermodel.dart';
+import 'package:aoa/service/provider/monthmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +88,7 @@ class _PreviewPageWorkerState extends State<PreviewPageWorker> {
                         onTap: ()async {
                           var result = await context.read<WorkerModel>().searchList;
                           List<Worker> model = result;
-                          createPDF(model, context.read<CalisanModel>().valRead(), context.read<ParaModel>().valRead());
+                          createPDF(model, context.read<CalisanModel>().valRead(), context.read<ParaModel>().valRead(), context.read<MonthModel>().valRead());
                           context.read<CalisanModel>().valChange(0);
                           context.read<ParaModel>().valChange(0);
                           Navigator.pop(context);

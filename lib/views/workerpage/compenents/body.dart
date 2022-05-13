@@ -1,3 +1,4 @@
+import 'package:aoa/service/provider/tarihmodel.dart';
 import 'package:aoa/views/previewpageworker/previewpageworker.dart';
 import 'package:aoa/views/workerpage/compenents/calisankayit.dart';
 import 'package:aoa/views/workerpage/compenents/calisanlarim.dart';
@@ -7,6 +8,7 @@ import 'package:aoa/views/workerpage/compenents/guncelle.dart';
 import 'package:aoa/views/workerpage/compenents/kayit.dart';
 import 'package:aoa/views/workerpage/compenents/tumkayitlar.dart';
 import 'package:flutter/material.dart';
+import'package:provider/provider.dart';
 import 'package:get/get.dart';
 
 class Body extends StatelessWidget {
@@ -22,6 +24,7 @@ class Body extends StatelessWidget {
           children: [
             InkWell(
               onTap: (){
+                context.read<TarihModel>().valChange("Tarih Seçiniz");
                 Get.to(() => const Kayit());
               },
                 child: CustomButton("Kayıt Ekle", "assets/kayit.png")),

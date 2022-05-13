@@ -9,7 +9,7 @@ import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart';
 
-createPDF(List<Personal> model, int gelir, int gider) async {
+createPDF(List<Personal> model, int gelir, int gider, String ay) async {
   final font = await rootBundle.load("assets/open-sans.ttf");
   final ttf = Font.ttf(font);
   final pdf = Document();
@@ -19,7 +19,7 @@ createPDF(List<Personal> model, int gelir, int gider) async {
     build: (context) => [
       header(ttf),
       SizedBox(height: 1 * PdfPageFormat.cm),
-      title(),
+      title(ay, ttf),
       listTitle(ttf),
       SizedBox(height: 8),
       newList(model, context, ttf),
@@ -84,17 +84,14 @@ Widget header(font) {
   ]);
 }
 
-Widget title() {
+Widget title(ay, font) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Rapor',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        '$ay ayı Raporu',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, font: font),
       ),
-      SizedBox(height: 0.8 * PdfPageFormat.cm),
-      Text(
-          "1/${DateTime.now().month}/${DateTime.now().year} - ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
       SizedBox(height: 0.8 * PdfPageFormat.cm),
     ],
   );
