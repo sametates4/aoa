@@ -71,7 +71,7 @@ Widget header(font) {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Uygulama Adı Gelecek", style: TextStyle(fontWeight: FontWeight.bold, font: font)),
+            Text("Yevmiye - Puantaj Hesabım", style: TextStyle(fontWeight: FontWeight.bold, font: font)),
             Text(""),
             Text("Tarih: ${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}", style: TextStyle(font: font)),
           ],

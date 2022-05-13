@@ -36,7 +36,7 @@ class _PreviewPageWorkerState extends State<PreviewPageWorker> {
                 children: [
                   Column(
                     children: [
-                      const Text("Uygulama ismi gelecek"),
+                      const Text("Yevmiye - Puantaj Hesabım"),
                       const Text(""),
                       Text("Tarih: ${DateTime.now().year}/${DateTime.now().month}/${DateTime.now().day}"),
                     ],
