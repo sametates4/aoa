@@ -10,9 +10,18 @@ import 'package:aoa/service/provider/db/workermodel.dart';
 import 'package:aoa/service/provider/gelirmodel.dart';
 import 'package:aoa/service/provider/gidermodel.dart';
 import 'package:aoa/service/provider/gunmodel.dart';
+import 'package:aoa/service/provider/indexmodel.dart';
 import 'package:aoa/service/provider/monthmodel.dart';
+import 'package:aoa/service/provider/pdfpersonalgelir.dart';
+import 'package:aoa/service/provider/pdfpersonalgider.dart';
+import 'package:aoa/service/provider/pdfpersonalsaat.dart';
+import 'package:aoa/service/provider/pdfworkertoplamgider.dart';
+import 'package:aoa/service/provider/pdfworkertoplamis.dart';
+import 'package:aoa/service/provider/saatmodel.dart';
 import 'package:aoa/service/provider/stackmodel.dart';
 import 'package:aoa/service/provider/tarihmodel.dart';
+import 'package:aoa/service/provider/workertoplamcalisan.dart';
+import 'package:aoa/service/provider/workertoplamgider.dart';
 import 'package:aoa/views/homepage/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -95,6 +104,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ChartSaatModel()),
         ChangeNotifierProvider(create: (_) => CalisanModel()),
         ChangeNotifierProvider(create: (_) => ParaModel()),
+        ChangeNotifierProvider(create: (_) => IndexModel()),
+        ChangeNotifierProvider(create: (_) => WorkerToplamCalisan()),
+        ChangeNotifierProvider(create: (_) => WorkerToplamGider()),
+        ChangeNotifierProvider(create: (_) => SaatModel()),
+        ChangeNotifierProvider(create: (_) => PdfPersonalSaat()),
+        ChangeNotifierProvider(create: (_) => PdfPersonalGider()),
+        ChangeNotifierProvider(create: (_) => PdfPersonalGelir()),
+        ChangeNotifierProvider(create: (_) => PdfWorkerToplamGider()),
+        ChangeNotifierProvider(create: (_) => PdfWorkerToplaIs()),
       ],
       child: GetMaterialApp(
         title: 'Yevmiye - Puantaj Hesabım',

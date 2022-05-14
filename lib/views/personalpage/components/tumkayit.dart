@@ -28,11 +28,17 @@ class TumKayit extends StatelessWidget {
                             const Text("Gider"),
                           if(i.tur == "2")
                             const Text("Mesai"),
+                          Text(i.tarih),
                         ],
                       ),
                       title: Text(i.yapilanis),
                       subtitle: Text("${i.ucret} tl"),
-                      trailing: Text(i.tarih),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: (){
+                          value.delete(i.id);
+                        },
+                      ),
                     ),
                   );
                 },

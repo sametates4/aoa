@@ -4,7 +4,7 @@ class Personal{
   late int ucret;
   late String tarih;
   late String yapilanis;
-  late int month;
+  late String month;
   late int saat;
 
   Personal();

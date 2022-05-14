@@ -1,5 +1,7 @@
 import 'package:aoa/service/provider/db/calisanlarmodel.dart';
+import 'package:aoa/views/workerpage/compenents/calisanlarimbottom.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class Calisanlarim extends StatelessWidget {
@@ -26,6 +28,9 @@ class Calisanlarim extends StatelessWidget {
                           context.read<CalisanlarModel>().delete(i.id);
                         },
                       ),
+                      onTap: (){
+                        Get.bottomSheet(CalisanlarimBottom(calisanlar: i,));
+                      },
                     ),
                   );
                 },

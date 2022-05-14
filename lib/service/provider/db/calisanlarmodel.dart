@@ -18,6 +18,12 @@ class CalisanlarModel extends ChangeNotifier{
     notifyListeners();
   }
 
+  Future update(String telefon, String isim, int id)async{
+    _dao.update(id, {'isim':isim, 'telefon':telefon});
+    list = await _dao.read();
+    notifyListeners();
+  }
+
   Future delete(int id) async {
     _dao.delete(id);
     list = await _dao.read();

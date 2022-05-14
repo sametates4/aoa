@@ -1,3 +1,4 @@
+import 'package:aoa/service/provider/indexmodel.dart';
 import 'package:aoa/service/provider/tarihmodel.dart';
 import 'package:aoa/views/personalpage/components/customubutton.dart';
 import 'package:aoa/views/personalpage/components/dialog.dart';
@@ -67,6 +68,7 @@ class Body extends StatelessWidget {
             InkWell(
               onTap: () {
                 Get.bottomSheet(DialogRapor());
+                context.read<IndexModel>().valChange(0);
               },
               child: Container(
                 width: 150,

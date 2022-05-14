@@ -19,15 +19,14 @@ class TumKayitlar extends StatelessWidget {
                 var i = value.list[reserve];
                 return Card(
                   child: ListTile(
-                    leading: Text("Çalışılan Gün: ${i.gun}"),
+                    leading: Text("Gün: ${i.gun}"),
                     title: Text(i.isimsoyisim),
                     subtitle: Text(i.yapilanis),
                     trailing: Column(
                       children: [
-                        Text("İşe Başlama Tarihi: ${i.tarih}"),
+                        Text("Tarih: ${i.tarih}"),
                         //Text("Çalışılan Gün: ${i.gun}"),
-                        Text("Anlaşılan üçret: ${i.ucret}"),
-                        Text("Verilecek toplam üçret: ${i.toplamucret}"),
+                        Text("Ücret: ${i.ucret}"),
                       ],
                     ),
                   ),

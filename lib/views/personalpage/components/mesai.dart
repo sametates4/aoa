@@ -79,8 +79,7 @@ class Mesai extends StatelessWidget {
                             firstDate: DateTime(2020),
                             lastDate: DateTime(2050))
                         .then((e) {
-                      int month = int.parse("${e!.month}${e.year}");
-                      context.read<GunModel>().valChange(month);
+                      context.read<GunModel>().valChange("${e!.month}");
                       final DateFormat formatter = DateFormat('dd/MM/yyyy');
                       final String formatted = formatter.format(e);
                       context.read<TarihModel>().valChange(formatted);
@@ -105,8 +104,6 @@ class Mesai extends StatelessWidget {
                         context.read<GunModel>().valRead(),
                         int.parse(_saat.text),
                       );
-                      context.read<ChartMesaiModel>().valChange(context.read<ChartMesaiModel>().valRead() + int.parse(_ucret.text));
-                      context.read<ChartSaatModel>().valChange(context.read<ChartSaatModel>().valRead() + int.parse(_saat.text));
                       Get.back();
                     },
                     child: Container(

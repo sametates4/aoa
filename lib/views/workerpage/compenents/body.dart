@@ -1,3 +1,4 @@
+import 'package:aoa/service/provider/indexmodel.dart';
 import 'package:aoa/service/provider/tarihmodel.dart';
 import 'package:aoa/views/previewpageworker/previewpageworker.dart';
 import 'package:aoa/views/workerpage/compenents/calisankayit.dart';
@@ -64,6 +65,7 @@ class Body extends StatelessWidget {
               onTap: (){
                 //Get.to(() => const PreviewPageWorker());
                 Get.bottomSheet(DialogRaporWorker());
+                context.read<IndexModel>().valChange(0);
               },
                 child: CustomButton("Rapor Oluştur", "assets/rapor.png")),
           ],

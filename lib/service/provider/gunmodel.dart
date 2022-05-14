@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class GunModel extends ChangeNotifier{
-  late int value = DateTime.now().month;
+  late String value = "${DateTime.now().month}";
 
-  int valRead(){
+  String valRead(){
     return value;
   }
 
-  void valChange(int val){
+  void valChange(String val){
     value = val;
     notifyListeners();
   }

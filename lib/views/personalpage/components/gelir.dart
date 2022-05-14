@@ -67,9 +67,7 @@ class Gelir extends StatelessWidget {
                             firstDate: DateTime(2020),
                             lastDate: DateTime(2050))
                         .then((e) {
-                          int month = int.parse("${e!.month}${e.year}");
-                          print(month);
-                      context.read<GunModel>().valChange(month);
+                      context.read<GunModel>().valChange("${e!.month}");
                       final DateFormat formatter = DateFormat('dd/MM/yyyy');
                       final String formatted = formatter.format(e);
                       context.read<TarihModel>().valChange(formatted);
@@ -94,7 +92,6 @@ class Gelir extends StatelessWidget {
                         context.read<GunModel>().valRead(),
                         bos,
                       );
-                      context.read<ChartGelirModel>().valChange(context.read<ChartGelirModel>().valRead() + int.parse(_ucret.text));
                       Get.back();
                     },
                     child: Container(

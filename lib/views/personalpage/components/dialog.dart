@@ -1,6 +1,9 @@
 import 'package:aoa/service/provider/db/personalmodel.dart';
+import 'package:aoa/service/provider/gelirmodel.dart';
+import 'package:aoa/service/provider/gidermodel.dart';
+import 'package:aoa/service/provider/indexmodel.dart';
 import 'package:aoa/service/provider/monthmodel.dart';
-import 'package:aoa/service/serach.dart';
+import 'package:aoa/service/provider/saatmodel.dart';
 import 'package:aoa/views/previewpage/previewpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,16 +46,20 @@ class DialogRapor extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-
               SizedBox(
                 height: 324,
                 child: CupertinoPicker(
                   itemExtent: 64,
-                  children: month.map((e) => Center(child: Text(e),)).toList(),
-                  onSelectedItemChanged: (index){
+                  children: month
+                      .map((e) => Center(
+                    child: Text(e),
+                  ))
+                      .toList(),
+                  onSelectedItemChanged: (index) {
                     final item = month[index];
                     context.read<MonthModel>().valChange(item);
-                    print(item);
+                    context.read<IndexModel>().valChange(index);
+                    print(index);
                   },
                 ),
               ),
@@ -62,9 +69,61 @@ class DialogRapor extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 16, bottom: 10),
                     child: InkWell(
-                      onTap: (){
+                      onTap: () {
+                        context.read<GiderModel>().valChange(0);
+                        context.read<GelirModel>().valChange(0);
+                        context.read<SaatModel>().valChange(0);
+                        switch (context.read<IndexModel>().valRead()) {
+                          case 0:
+                            print("ocak");
+                            context.read<PersonalModel>().searchRead("1");
+                            break;
+                          case 1:
+                            context.read<PersonalModel>().searchRead("2");
+                            print("Şubat");
+                            break;
+                          case 2:
+                            context.read<PersonalModel>().searchRead("3");
+                            print("Mart");
+                            break;
+                          case 3:
+                            context.read<PersonalModel>().searchRead("4");
+                            print("Nisan");
+                            break;
+                          case 4:
+                            context.read<PersonalModel>().searchRead("5");
+                            print("Mayıs");
+                            break;
+                          case 5:
+                            context.read<PersonalModel>().searchRead("6");
+                            print("Hazşran");
+                            break;
+                          case 6:
+                            context.read<PersonalModel>().searchRead("7");
+                            print("Temmuz");
+                            break;
+                          case 7:
+                            context.read<PersonalModel>().searchRead("8");
+                            print("Ağustos");
+                            break;
+                          case 8:
+                            context.read<PersonalModel>().searchRead("9");
+                            print("Eyülü");
+                            break;
+                          case 9:
+                            context.read<PersonalModel>().searchRead("10");
+                            print("Ekim");
+                            break;
+                          case 10:
+                            context.read<PersonalModel>().searchRead("11");
+                            print("Kasım");
+                            break;
+                          case 11:
+                            context.read<PersonalModel>().searchRead("12");
+                            print("<Aralık>");
+                            break;
+                        }
                         context.read<PersonalModel>().clear();
-                        Search(month: context.read<MonthModel>().valRead(), context: context).search();
                         Get.back();
                         Get.to(const PreviewPage());
                       },
@@ -89,7 +148,12 @@ class DialogRapor extends StatelessWidget {
                                 offset: Offset(-4, -4),
                               ),
                             ]),
-                        child: const Center(child: Text("Onayla", style: TextStyle(fontSize: 19),),),
+                        child: const Center(
+                          child: Text(
+                            "Onayla",
+                            style: TextStyle(fontSize: 19),
+                          ),
+                        ),
                       ),
                     ),
                   ),

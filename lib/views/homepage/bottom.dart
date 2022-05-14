@@ -1,7 +1,9 @@
+import 'package:aoa/service/provider/indexmodel.dart';
 import 'package:aoa/views/personalpage/components/dialog.dart';
 import 'package:aoa/views/previewpage/previewpage.dart';
 import 'package:aoa/views/workerpage/compenents/dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
 class Bottom extends StatelessWidget {
@@ -28,6 +30,7 @@ class Bottom extends StatelessWidget {
                   child: const Text("Seç"),
                   onPressed: (){
                     Get.back();
+                    context.read<IndexModel>().valChange(0);
                     Get.bottomSheet(DialogRapor());
                   },
                 ),
@@ -41,6 +44,7 @@ class Bottom extends StatelessWidget {
                   child: const Text("Seç"),
                   onPressed: (){
                     Get.back();
+                    context.read<IndexModel>().valChange(0);
                     Get.bottomSheet(DialogRaporWorker());
                   },
                 ),

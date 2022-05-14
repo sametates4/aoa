@@ -27,7 +27,7 @@ class Guncelle extends StatelessWidget {
                       subtitle: Text(i.yapilanis),
                       leading: Text(i.telefon),
                       onTap: (){
-                        context.read<GunModel>().valChange(i.gun);
+                        context.read<GunModel>().valChange("${i.gun}");
                         Get.bottomSheet(GuncelleCard(i));
                       },
                     ),

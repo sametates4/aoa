@@ -1,10 +1,13 @@
 import 'package:aoa/service/db/personaldao.dart';
+import 'package:aoa/service/db/workerdao.dart';
 import 'package:aoa/service/model/personal.dart';
 import 'package:aoa/service/provider/chartgelir.dart';
 import 'package:aoa/service/provider/chartgider.dart';
 import 'package:aoa/service/provider/chartmesai.dart';
 import 'package:aoa/service/provider/chartsaat.dart';
 import 'package:aoa/service/provider/db/personalmodel.dart';
+import 'package:aoa/service/provider/workertoplamcalisan.dart';
+import 'package:aoa/service/provider/workertoplamgider.dart';
 import 'package:aoa/views/homepage/bottom.dart';
 import 'package:aoa/views/ozetgrafik/ozetgrafik.dart';
 import 'package:aoa/views/personalpage/personalpage.dart';
@@ -14,6 +17,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../service/model/worker.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,13 +33,14 @@ class _HomePageState extends State<HomePage> {
     Provider.of<PersonalModel>(context, listen: false).read();
     super.initState();
     getData();
+    getDataWorker();
   }
 
   void getData() async {
-    int month = int.parse("${DateTime.now().month}${DateTime.now().year}");
+    late String month = "${DateTime.now().month}";
     var result = await PersonalDao().read();
     List<Personal> model = result;
-
+    print("1212");
     for (int i = 0; i < model.length; i++) {
       if (month == model[i].month) {
         if (model[i].tur == "0") {
@@ -55,6 +61,20 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void getDataWorker() async {
+    print("212121");
+    late String month = "${DateTime.now().month}";
+    var result = await WorkerDao().read();
+    List<Calisanlar> model = result;
+
+    for (int i = 0; i < model.length; i++) {
+      if (month == model[i].month) {
+        context.read<WorkerToplamGider>().valChange(context.read<WorkerToplamGider>().valRead() + model[i].ucret);
+        context.read<WorkerToplamCalisan>().valChange(context.read<WorkerToplamCalisan>().valRead()+1);
+      }
+    }
+  }
+
   late String appPackageName = "sametates.com.aoa";
 
   @override
@@ -68,7 +88,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.to(() => const WorkerPage());
                   },
                   child: Container(
@@ -93,18 +113,26 @@ class _HomePageState extends State<HomePage> {
                         ]),
                     child: Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/worker.png", height: 70,),
-                            const SizedBox(height: 8,),
-                            const Text("Çalışanım için hesapla", style: TextStyle(fontSize: 12),),
-                          ],
-                        )),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/worker.png",
+                          height: 70,
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        const Text(
+                          "Çalışanım için hesapla",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    )),
                   ),
                 ),
                 InkWell(
-                  onTap: (){
-                    Get.to(() =>  const PersonaPage());
+                  onTap: () {
+                    Get.to(() => const PersonaPage());
                   },
                   child: Container(
                     width: 130,
@@ -128,13 +156,18 @@ class _HomePageState extends State<HomePage> {
                         ]),
                     child: Center(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset("assets/personal.png", height: 70,),
-                            const SizedBox(height: 8,),
-                            const Text("Kendim için hesapla"),
-                          ],
-                        )),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/personal.png",
+                          height: 70,
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        const Text("Kendim için hesapla"),
+                      ],
+                    )),
                   ),
                 ),
               ],
@@ -143,7 +176,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.to(() => const OzetGrafik());
                   },
                   child: Container(
@@ -166,12 +199,11 @@ class _HomePageState extends State<HomePage> {
                             offset: Offset(-4, -4),
                           ),
                         ]),
-                    child: const Center(
-                        child: Text("Özet Grafik")),
+                    child: const Center(child: Text("Özet Grafik")),
                   ),
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     //Get.to(() =>  const PersonaPage());
                     Get.bottomSheet(const Bottom());
                   },
@@ -195,51 +227,48 @@ class _HomePageState extends State<HomePage> {
                             offset: Offset(-4, -4),
                           ),
                         ]),
-                    child: const Center(
-                        child: Text("Hızlı Rapor Oluştur")),
+                    child: const Center(child: Text("Hızlı Rapor Oluştur")),
                   ),
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: (){
-                    try {
-                      launch("market://details?id=" + appPackageName);
-                    } on PlatformException catch(e) {
-                      launch("https://play.google.com/store/apps/details?id=" + appPackageName);
-                    } finally {
-                      launch("https://play.google.com/store/apps/details?id=" + appPackageName);
-                    }
-                  },
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.purple,
-                            spreadRadius: 1,
-                            blurRadius: 8,
-                            offset: Offset(4, 4),
-                          ),
-                          BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: 2,
-                            blurRadius: 8,
-                            offset: Offset(-4, -4),
-                          ),
-                        ]),
-                    child: const Center(
-                        child: Text("Bizi Oylayın")),
-                  ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              InkWell(
+                onTap: () {
+                  try {
+                    launch("market://details?id=" + appPackageName);
+                  } on PlatformException catch (e) {
+                    launch("https://play.google.com/store/apps/details?id=" +
+                        appPackageName);
+                  } finally {
+                    launch("https://play.google.com/store/apps/details?id=" +
+                        appPackageName);
+                  }
+                },
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.purple,
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: Offset(4, 4),
+                        ),
+                        BoxShadow(
+                          color: Colors.teal,
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: Offset(-4, -4),
+                        ),
+                      ]),
+                  child: const Center(child: Text("Bizi Oylayın")),
                 ),
-              ]
-            ),
+              ),
+            ]),
           ],
         ),
       ),

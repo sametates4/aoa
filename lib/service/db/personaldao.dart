@@ -8,9 +8,9 @@ class PersonalDao{
     return data.map((e) => Personal.fromMap(e)).toList();
   }
 
-  Future<List<Personal>> search(int month) async{
+  Future<List<Personal>> search(String val) async{
     var db = await VeritabaniYardimcisi.veritabaniErisim();
-    List<Map<String, dynamic>> data = await db.rawQuery('SELECT * FROM personal WHERE search=?', [2]);
+    List<Map<String, dynamic>> data =  await db.rawQuery("SELECT * FROM personal where month = $val");
     return data.map((e) => Personal.fromMap(e)).toList();
   }
 

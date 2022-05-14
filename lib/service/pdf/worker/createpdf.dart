@@ -10,7 +10,7 @@ import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart';
 
-createPDF(List<Worker> model, int kisi, int gider, String ay) async {
+createPDF(List<Calisanlar> model, int kisi, int gider, String ay) async {
   final font = await rootBundle.load("assets/open-sans.ttf");
   final ttf = Font.ttf(font);
   final pdf = Document();
@@ -52,7 +52,7 @@ createPDF(List<Worker> model, int kisi, int gider, String ay) async {
     } else {
     }
   }
-  late String newPath = "${copyto.path}/Personel Rapor ${DateTime.now().second}.pdf";
+  late String newPath = "${copyto.path}/Worker Rapor ${DateTime.now().second}.pdf";
   final String path = '$dir/test.pdf';
   final File file = File(newPath);
 
@@ -105,7 +105,7 @@ Widget listTitle(font){
     child: Row(
         children: [
           Container(
-            width: 80,
+            width: 110,
             height: 25,
             decoration: pw.BoxDecoration(
               border: pw.Border.all(),
@@ -135,7 +135,7 @@ Widget listTitle(font){
             ),
           ),
           Container(
-            width: 80,
+            width: 105,
             height: 25,
             decoration: pw.BoxDecoration(
               border: pw.Border.all(),
@@ -146,21 +146,6 @@ Widget listTitle(font){
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Yapılan iş",style: pw.TextStyle(font: font)),
-              ],
-            ),
-          ),
-          Container(
-            width: 55,
-            height: 25,
-            decoration: pw.BoxDecoration(
-              border: pw.Border.all(),
-              borderRadius: pw.BorderRadius.circular(1),
-            ),
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("G. Ücret",style: pw.TextStyle(font: font)),
               ],
             ),
           ),
@@ -214,7 +199,7 @@ Widget listTitle(font){
   );
 }
 
-Widget newList(List<Worker> model, context, font){
+Widget newList(List<Calisanlar> model, context, font){
   return       Wrap(
     children: List<Widget>.generate(model.length, (int index) {
       final issue = model[index];
@@ -228,7 +213,7 @@ Widget newList(List<Worker> model, context, font){
         child: Row(
             children: [
               Container(
-                width: 80,
+                width: 110,
                 height: 25,
                 decoration: pw.BoxDecoration(
                   border: pw.Border.all(),
@@ -258,7 +243,7 @@ Widget newList(List<Worker> model, context, font){
                 ),
               ),
               Container(
-                width: 80,
+                width: 105,
                 height: 25,
                 decoration: pw.BoxDecoration(
                   border: pw.Border.all(),
@@ -273,21 +258,6 @@ Widget newList(List<Worker> model, context, font){
                 ),
               ),
               Container(
-                width: 55,
-                height: 25,
-                decoration: pw.BoxDecoration(
-                  border: pw.Border.all(),
-                  borderRadius: pw.BorderRadius.circular(1),
-                ),
-                child: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(issue.ucret.toString(),style: pw.TextStyle(font: font, fontSize: 10)),
-                  ],
-                ),
-              ),
-              Container(
                 width: 60,
                 height: 25,
                 decoration: pw.BoxDecoration(
@@ -298,7 +268,7 @@ Widget newList(List<Worker> model, context, font){
                   //crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(issue.toplamucret.toString(),style: pw.TextStyle(font: font, fontSize: 10)),
+                    Text(issue.ucret.toString(),style: pw.TextStyle(font: font, fontSize: 10)),
                   ],
                 ),
               ),

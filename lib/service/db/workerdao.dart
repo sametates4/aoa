@@ -2,10 +2,10 @@ import 'package:aoa/service/db/veritabaniYardimcisi.dart';
 import 'package:aoa/service/model/worker.dart';
 
 class WorkerDao{
-  Future<List<Worker>> read() async{
+  Future<List<Calisanlar>> read() async{
     var db = await VeritabaniYardimcisi.veritabaniErisim();
     List<Map<String, dynamic>> data =  await db.rawQuery("SELECT * FROM worker");
-    return data.map((e) => Worker.fromMap(e)).toList();
+    return data.map((e) => Calisanlar.fromMap(e)).toList();
   }
 
   Future<void> insert(Map<String, Object> data) async{
@@ -13,10 +13,10 @@ class WorkerDao{
     db.insert("worker", data);
   }
 
-  Future<List<Worker>> search(int month) async{
+  Future<List<Calisanlar>> search(String val) async{
     var db = await VeritabaniYardimcisi.veritabaniErisim();
-    List<Map<String, dynamic>> data = await db.rawQuery('''SELECT * FROM worker WHERE tarih LIKE '$month' ''');
-    return data.map((e) => Worker.fromMap(e)).toList();
+    List<Map<String, dynamic>> data =  await db.rawQuery("SELECT * FROM worker where month = $val");
+    return data.map((e) => Calisanlar.fromMap(e)).toList();
   }
 
   Future<void> update(int id, Map<String, Object> data)async{

@@ -5,14 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class GuncelleCard extends StatelessWidget {
-  final Worker worker;
-
+  final Calisanlar worker;
+  final _ucret = TextEditingController();
   GuncelleCard(this.worker, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 290,
+      height: 320,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
@@ -29,8 +29,16 @@ class GuncelleCard extends StatelessWidget {
             Text("Yapılan İş: ${worker.yapilanis}", style: const TextStyle(fontSize: 19),),
             const SizedBox(height: 4,),
             Text("Anlaşılan üçret: ${worker.ucret}", style: const TextStyle(fontSize: 19),),
-            const SizedBox(height: 8,),
-            Text("Verilecek toplam üçret: ${worker.toplamucret}", style: const TextStyle(fontSize: 19),),
+            const SizedBox(height: 4,),
+            TextField(
+              controller: _ucret,
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                label: Text("Yeni Ücret"),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -38,14 +46,14 @@ class GuncelleCard extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: (){
-                    context.read<GunModel>().valChange(context.read<GunModel>().valRead() + 1);
+                    context.read<GunModel>().valChange("${int.parse(context.read<GunModel>().valRead()) + 1}");
                   },
                 ),
-                Text(context.watch<GunModel>().valRead().toString(), style: const TextStyle(fontSize: 19),),
+                Text(context.watch<GunModel>().valRead(), style: const TextStyle(fontSize: 19),),
                 IconButton(
                   icon: const Icon(Icons.remove),
                   onPressed: (){
-                    context.read<GunModel>().valChange(context.read<GunModel>().valRead() - 1);
+                    context.read<GunModel>().valChange("${int.parse(context.read<GunModel>().valRead()) - 1}");
                   },
                 ),
               ],
@@ -55,8 +63,8 @@ class GuncelleCard extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: (){
-                    int toplam = worker.ucret * context.read<GunModel>().valRead();
-                    context.read<WorkerModel>().update(toplam, context.read<GunModel>().valRead(), worker.id);
+                    int toplam = worker.ucret * int.parse(context.read<GunModel>().valRead());
+                    context.read<WorkerModel>().update(toplam, int.parse(context.read<GunModel>().valRead()), worker.id, int.parse(_ucret.text));
                     Navigator.pop(context);
                   },
                   child: Container(

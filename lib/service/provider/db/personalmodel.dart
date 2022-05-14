@@ -12,17 +12,8 @@ class PersonalModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> searchRead() async{
-    searchList;
-    notifyListeners();
-  }
-
-  Future<void> search(int month) async{
-    for(int i = 0; i < list.length; i++){
-      if(list[i].month == month){
-        searchList.add(list[i]);
-      }
-    }
+  Future<void> searchRead(String val) async{
+    searchList = await _dao.search(val);
     notifyListeners();
   }
 
@@ -31,7 +22,7 @@ class PersonalModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future insert(String tur, int ucret, String tarih, String yapilanis, int month, int saat) async {
+  Future insert(String tur, int ucret, String tarih, String yapilanis, String month, int saat) async {
     _dao.insert({'tur': tur, 'ucret': ucret, 'tarih': tarih, 'yapilanis':yapilanis, 'month':month, 'saat':saat});
     list = await _dao.read();
     notifyListeners();

@@ -66,8 +66,7 @@ class Gider extends StatelessWidget {
                             firstDate: DateTime(2020),
                             lastDate: DateTime(2050))
                         .then((e) {
-                      int month = int.parse("${e!.month}${e.year}");
-                      context.read<GunModel>().valChange(month);
+                      context.read<GunModel>().valChange("${e!.month}");
                       final DateFormat formatter = DateFormat('dd/MM/yyyy');
                       final String formatted = formatter.format(e);
                       context.read<TarihModel>().valChange(formatted);
@@ -90,7 +89,6 @@ class Gider extends StatelessWidget {
                           context.read<TarihModel>().valRead(),
                           _yapilanis.text,
                           context.read<GunModel>().valRead(), bos);
-                      context.read<ChartGiderModel>().valChange(context.read<ChartGiderModel>().valRead() + int.parse(_ucret.text));
                       Get.back();
                     },
                     child: Container(

@@ -9,7 +9,7 @@ import 'dart:io';
 
 import 'package:permission_handler/permission_handler.dart';
 
-createPDF(List<Personal> model, int gelir, int gider, String ay) async {
+createPDF(List<Personal> model, int gelir, int gider, String ay, int saat) async {
   final font = await rootBundle.load("assets/open-sans.ttf");
   final ttf = Font.ttf(font);
   final pdf = Document();
@@ -24,7 +24,7 @@ createPDF(List<Personal> model, int gelir, int gider, String ay) async {
       SizedBox(height: 8),
       newList(model, context, ttf),
       SizedBox(height: 15),
-      total(ttf, gelir, gider),
+      total(ttf, gelir, gider, saat),
     ],
     footer: (pw.Context context) {
       return pw.Container(
@@ -52,7 +52,7 @@ createPDF(List<Personal> model, int gelir, int gider, String ay) async {
     } else {
     }
   }
-  late String newPath = "${copyto.path}/Rapor ${DateTime.now().second}.pdf";
+  late String newPath = "${copyto.path}/Personal Rapor ${DateTime.now().second}.pdf";
   final String path = '$dir/test.pdf';
   final File file = File(newPath);
 
@@ -257,7 +257,7 @@ Widget newList(List<Personal> model, context, font){
   );
 }
 
-Widget total(font, gelir, gider){
+Widget total(font, gelir, gider, saat){
   return Row(
     mainAxisAlignment: MainAxisAlignment.end,
     children: [
@@ -265,6 +265,7 @@ Widget total(font, gelir, gider){
         children: [
           Text("Toplam kazanılan: $gelir", style: TextStyle(font: font)),
           Text("Toplam Harcanan: $gider", style: TextStyle(font: font)),
+          Text("Toplam Mesai Saati: $saat", style: TextStyle(font: font)),
           Divider(),
           Text("Sonuc: ${gelir - gider}", style: TextStyle(font: font)),
         ]

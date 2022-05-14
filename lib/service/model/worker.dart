@@ -1,4 +1,4 @@
-class Worker{
+class Calisanlar{
   late int id;
   late String isimsoyisim;
   late int ucret;
@@ -7,11 +7,11 @@ class Worker{
   late String yapilanis;
   late int toplamucret;
   late String telefon;
-  late int month;
+  late String month;
 
-  Worker();
+  Calisanlar();
 
-  Worker.fromMap(Map<String, dynamic> map){
+  Calisanlar.fromMap(Map<String, dynamic> map){
     id = map['id'];
     isimsoyisim = map['isimsoyisim'];
     ucret = map['ucret'];

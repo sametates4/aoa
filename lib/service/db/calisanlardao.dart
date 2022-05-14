@@ -13,6 +13,11 @@ class CalisanlarDao{
     db.insert("calisanlar", data);
   }
 
+  Future<void> update(int id, Map<String, Object> data)async{
+    var db = await VeritabaniYardimcisi.veritabaniErisim();
+    db.update("calisanlar", data, where: "id=?", whereArgs: [id]);
+  }
+
   Future<bool> delete(int id) async{
     var db = await VeritabaniYardimcisi.veritabaniErisim();
     int del = await db.delete("calisanlar", where: 'id = ?', whereArgs: [id]);
