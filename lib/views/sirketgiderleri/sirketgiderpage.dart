@@ -55,7 +55,7 @@ class _SirketGiderPageState extends State<SirketGiderPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(() => SirketGiderDoruntule());
+                    Get.to(() => SirketGiderGoruntule());
                   },
                   child: Container(
                     width: 130,

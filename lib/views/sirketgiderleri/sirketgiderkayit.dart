@@ -110,7 +110,7 @@ class SirketGiderKayit extends StatelessWidget {
               ]),
           child: const Center(
             child: Text(
-              "Kayıt Et",
+              "Gider Ekle",
               style: TextStyle(fontSize: 19),
             ),
           ),
