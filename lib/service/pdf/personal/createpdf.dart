@@ -197,9 +197,9 @@ Widget newList(List<Personal> model, context, font){
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if(issue.tur == "0")
-                    Text("Gelir",style: pw.TextStyle(font: font)),
-                  if(issue.tur == "1")
                     Text("Gider",style: pw.TextStyle(font: font)),
+                  if(issue.tur == "1")
+                    Text("Gelir",style: pw.TextStyle(font: font)),
                   if(issue.tur == "2")
                     Text("Mesai",style: pw.TextStyle(font: font)),
                 ],
