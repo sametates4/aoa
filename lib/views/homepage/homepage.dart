@@ -11,6 +11,7 @@ import 'package:aoa/service/provider/workertoplamgider.dart';
 import 'package:aoa/views/homepage/bottom.dart';
 import 'package:aoa/views/ozetgrafik/ozetgrafik.dart';
 import 'package:aoa/views/personalpage/personalpage.dart';
+import 'package:aoa/views/sirketgiderleri/sirketgiderpage.dart';
 import 'package:aoa/views/workerpage/workerpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -235,15 +236,7 @@ class _HomePageState extends State<HomePage> {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               InkWell(
                 onTap: () {
-                  try {
-                    launch("market://details?id=" + appPackageName);
-                  } on PlatformException catch (e) {
-                    launch("https://play.google.com/store/apps/details?id=" +
-                        appPackageName);
-                  } finally {
-                    launch("https://play.google.com/store/apps/details?id=" +
-                        appPackageName);
-                  }
+                  Get.to(() => SirketGiderPage());
                 },
                 child: Container(
                   width: 130,
@@ -265,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                           offset: Offset(-4, -4),
                         ),
                       ]),
-                  child: const Center(child: Text("Bizi Oylayın")),
+                  child: const Center(child: Text("Şirket Giderleri")),
                 ),
               ),
             ]),

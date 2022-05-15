@@ -6,6 +6,7 @@ import 'package:aoa/service/provider/chartsaat.dart';
 import 'package:aoa/service/provider/db/calisanlarmodel.dart';
 import 'package:aoa/service/provider/db/paramodel.dart';
 import 'package:aoa/service/provider/db/personalmodel.dart';
+import 'package:aoa/service/provider/db/sirketgidermodel.dart';
 import 'package:aoa/service/provider/db/workermodel.dart';
 import 'package:aoa/service/provider/gelirmodel.dart';
 import 'package:aoa/service/provider/gidermodel.dart';
@@ -113,6 +114,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PdfPersonalGelir()),
         ChangeNotifierProvider(create: (_) => PdfWorkerToplamGider()),
         ChangeNotifierProvider(create: (_) => PdfWorkerToplaIs()),
+        ChangeNotifierProvider(create: (_) => SirketGiderModel()),
       ],
       child: GetMaterialApp(
         title: 'Yevmiye - Puantaj Hesabım',
