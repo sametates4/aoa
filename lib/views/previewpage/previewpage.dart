@@ -1,15 +1,10 @@
-import 'package:aoa/service/db/personaldao.dart';
 import 'package:aoa/service/model/personal.dart';
 import 'package:aoa/service/pdf/personal/createpdf.dart';
-import 'package:aoa/service/provider/chartsaat.dart';
 import 'package:aoa/service/provider/db/personalmodel.dart';
-import 'package:aoa/service/provider/gelirmodel.dart';
-import 'package:aoa/service/provider/gidermodel.dart';
 import 'package:aoa/service/provider/monthmodel.dart';
 import 'package:aoa/service/provider/pdfpersonalgelir.dart';
 import 'package:aoa/service/provider/pdfpersonalgider.dart';
 import 'package:aoa/service/provider/pdfpersonalsaat.dart';
-import 'package:aoa/service/provider/saatmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
