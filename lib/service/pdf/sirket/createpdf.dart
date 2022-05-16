@@ -108,7 +108,7 @@ Widget listTitle(font){
     child: Row(
         children: [
           Container(
-            width: 360,
+            width: 350,
             height: 25,
             decoration: pw.BoxDecoration(
               border: pw.Border.all(),
@@ -138,7 +138,7 @@ Widget listTitle(font){
             ),
           ),
           Container(
-            width: 56.7,
+            width: 66.7,
             height: 25,
             decoration: pw.BoxDecoration(
               border: pw.Border.all(),
@@ -171,7 +171,7 @@ Widget newList(List<SirketGider> model, context, font){
         child: Row(
             children: [
               Container(
-                width: 360,
+                width: 357,
                 height: 30,
                 decoration: pw.BoxDecoration(
                   border: pw.Border.all(),
@@ -201,7 +201,7 @@ Widget newList(List<SirketGider> model, context, font){
                 ),
               ),
               Container(
-                width: 56.7,
+                width: 69.7,
                 height: 30,
                 decoration: pw.BoxDecoration(
                   border: pw.Border.all(),
