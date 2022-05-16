@@ -1,58 +1,24 @@
-import 'package:aoa/service/model/personal.dart';
-import 'package:aoa/service/pdf/personal/createpdf.dart';
-import 'package:aoa/service/provider/db/personalmodel.dart';
+import 'package:aoa/service/model/sirketgider.dart';
+import 'package:aoa/service/provider/db/sirketgidermodel.dart';
 import 'package:aoa/service/provider/monthmodel.dart';
-import 'package:aoa/service/provider/pdfpersonalgelir.dart';
-import 'package:aoa/service/provider/pdfpersonalgider.dart';
-import 'package:aoa/service/provider/pdfpersonalsaat.dart';
 import 'package:flutter/material.dart';
+import 'package:aoa/service/pdf/sirket/createpdf.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class PreviewPage extends StatefulWidget {
-  const PreviewPage({Key? key}) : super(key: key);
+class PreviewPageSirket extends StatefulWidget {
+  const PreviewPageSirket({Key? key}) : super(key: key);
 
   @override
-  State<PreviewPage> createState() => _PreviewPageState();
+  State<PreviewPageSirket> createState() => _PreviewPageSirketState();
 }
 
-class _PreviewPageState extends State<PreviewPage> {
-  @override
-  void initState() {
-    Provider.of<PersonalModel>(context, listen: false).read();
-    super.initState();
-    getData();
-  }
-
-  void getData() async {
-    var result = await context.read<PersonalModel>().searchList;
-    List<Personal> model = result;
-    print("1212");
-    for (int i = 0; i < model.length; i++) {
-      if (model[i].tur == "0") {
-        context.read<PdfPersonalGider>().valChange(
-            context.read<PdfPersonalGider>().valRead() + model[i].ucret);
-      }
-      if (model[i].tur == "1") {
-        context.read<PdfPersonalGelir>().valChange(
-            context.read<PdfPersonalGelir>().valRead() + model[i].ucret);
-      }
-      if (model[i].tur == "2") {
-        context.read<PdfPersonalGelir>().valChange(
-            context.read<PdfPersonalGelir>().valRead() + model[i].ucret);
-        context.read<PdfPersonalSaat>().valChange(
-            context.read<PdfPersonalSaat>().valRead() + model[i].saat);
-      }
-    }
-  }
-
+class _PreviewPageSirketState extends State<PreviewPageSirket> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Ön İzleme"),
-      ),
+      appBar: AppBar(title: Text("Ön İzleme"),),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -81,7 +47,7 @@ class _PreviewPageState extends State<PreviewPage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child:
-                    Consumer<PersonalModel>(builder: (context, value, child) {
+                Consumer<SirketGiderModel>(builder: (context, value, child) {
                   if (value.searchList.isNotEmpty) {
                     return ListView.builder(
                       itemCount: value.searchList.length,
@@ -89,16 +55,8 @@ class _PreviewPageState extends State<PreviewPage> {
                         var i = value.searchList[index];
                         return Card(
                           child: ListTile(
-                            leading: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (i.tur == "1") const Text("Gelir"),
-                                if (i.tur == "0") const Text("Gider"),
-                                if (i.tur == "2") const Text("Mesai"),
-                              ],
-                            ),
-                            title: Text(i.yapilanis),
-                            subtitle: Text("${i.ucret} tl"),
+                            title: Text(i.aciklama),
+                            subtitle: Text("${i.gider} tl"),
                             trailing: Text(i.tarih),
                           ),
                         );
@@ -124,17 +82,9 @@ class _PreviewPageState extends State<PreviewPage> {
                       ),
                       InkWell(
                         onTap: () async {
-                          var result = await context.read<PersonalModel>().searchList;
-                          List<Personal> model = result;
-                          createPDF(
-                              model,
-                              context.read<PdfPersonalGelir>().valRead(),
-                              context.read<PdfPersonalGider>().valRead(),
-                              context.read<MonthModel>().valRead(),
-                              context.read<PdfPersonalSaat>().valRead());
-                          context.read<PdfPersonalSaat>().valChange(0);
-                          context.read<PdfPersonalGelir>().valChange(0);
-                          context.read<PdfPersonalGider>().valChange(0);
+                          var result = await context.read<SirketGiderModel>().searchList;
+                          List<SirketGider> model = result;
+                          createPDF(model, context.read<MonthModel>().valRead());
                           Get.back();
                         },
                         child: Container(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class SirketGiderModel extends ChangeNotifier{
   List<SirketGider> list = <SirketGider>[];
+  List<SirketGider> searchList = <SirketGider>[];
 
   final SirketGiderDao _dao = SirketGiderDao();
 
@@ -23,6 +24,15 @@ class SirketGiderModel extends ChangeNotifier{
     notifyListeners();
   }
 
+  Future<void> searchRead(String val) async{
+    searchList = await _dao.search(val);
+    notifyListeners();
+  }
+
+  Future<void> clear()async{
+    searchList.clear();
+    notifyListeners();
+  }
   Future delete(int id) async {
     _dao.delete(id);
     list = await _dao.read();

@@ -59,9 +59,7 @@ class Body extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(
-          height: 22,
-        ),
+        const SizedBox(height: 22,),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

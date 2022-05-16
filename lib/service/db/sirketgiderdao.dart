@@ -13,10 +13,16 @@ class SirketGiderDao{
     db.insert("sirketgider", data);
   }
 
-  Future<void> update(int id, Map<String, Object> data)async{
+  Future<void> update(int id, Map<String, Object> data)async {
     var db = await VeritabaniYardimcisi.veritabaniErisim();
     db.update("sirketgider", data, where: "id=?", whereArgs: [id]);
   }
+
+    Future<List<SirketGider>> search(String val) async{
+      var db = await VeritabaniYardimcisi.veritabaniErisim();
+      List<Map<String, dynamic>> data =  await db.rawQuery("SELECT * FROM sirketgider where month = $val");
+      return data.map((e) => SirketGider.fromMap(e)).toList();
+    }
 
   Future<bool> delete(int id) async{
     var db = await VeritabaniYardimcisi.veritabaniErisim();

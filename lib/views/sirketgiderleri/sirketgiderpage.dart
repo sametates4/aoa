@@ -1,5 +1,7 @@
+import 'package:aoa/service/provider/indexmodel.dart';
 import 'package:aoa/service/provider/tarihmodel.dart';
 import 'package:aoa/views/bottomvawbar.dart';
+import 'package:aoa/views/sirketgiderleri/monthdialog.dart';
 import 'package:aoa/views/sirketgiderleri/sirketgidergoruntule.dart';
 import 'package:aoa/views/sirketgiderleri/sirketgiderkayit.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +84,45 @@ class _SirketGiderPageState extends State<SirketGiderPage> {
                 ),
               ],
             ),
+          ),
+          const SizedBox(height: 22,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.bottomSheet(MonthDialog());
+                  context.read<IndexModel>().valChange(0);
+                },
+                child: Container(
+                  width: 150,
+                  height: 75,
+                  decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.purple,
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: Offset(4, 4),
+                        ),
+                        BoxShadow(
+                          color: Colors.black12,
+                          spreadRadius: 2,
+                          blurRadius: 8,
+                          offset: Offset(-4, -4),
+                        ),
+                      ]),
+                  child: const Center(
+                    child: Text(
+                      "Rapor Oluştur",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

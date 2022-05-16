@@ -74,8 +74,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  late String appPackageName = "sametates.com.aoa";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
